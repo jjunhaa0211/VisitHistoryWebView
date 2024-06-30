@@ -17,15 +17,6 @@
         "revision" : "d41ef523faef0f911369f79c0b96815d9dbb6d7a",
         "version" : "3.0.0"
       }
-    },
-    {
-      "identity" : "visithistorywebview",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/jjunhaa0211/VisitHistoryWebView",
-      "state" : {
-        "branch" : "main",
-        "revision" : "fd3f2a53c8aeceff096cd3c2814027eb1926d4bd"
-      }
     }
   ],
   "version" : 2
