@@ -10,7 +10,7 @@ enum HistoryManagerError: Error {
 }
 
 open class HistoryManager {
-    static let shared = HistoryManager()
+    public static let shared = HistoryManager()
     public var historyList = [URL: Int]()
     
     private init() {}
