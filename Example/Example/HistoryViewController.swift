@@ -1,5 +1,4 @@
 import UIKit
-import VisitHistoryWebView
 
 class HistoryViewController: UITableViewController {
     private var historyList: [URL] {
@@ -8,6 +7,7 @@ class HistoryViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        HistoryManager.shared.configureStorageType(.keychain)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         setupNavigationBar()
     }

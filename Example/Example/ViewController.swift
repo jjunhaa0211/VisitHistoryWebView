@@ -9,7 +9,6 @@ import UIKit
 import WebKit
 import SnapKit
 import Then
-import VisitHistoryWebView
 
 class ViewController: UIViewController {
     var webView: WKWebView!
@@ -35,6 +34,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        HistoryManager.shared.configureStorageType(.keychain)
         setupWebView()
         setupButtons()
         loadInitialURL()
@@ -138,7 +138,7 @@ extension ViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if let url = webView.url {
             do {
-                try HistoryManager.shared.addHistory(url)
+                try HistoryManager.shared.addHistory(url, shouldPrint: true)
             } catch {
                 print("Failed to add URL to history: \(error)")
             }
