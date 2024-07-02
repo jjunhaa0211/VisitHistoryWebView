@@ -3,6 +3,8 @@
 # VisitHistoryWebView
 
 `VisitHistoryWebView`는 웹 브라우징 히스토리를 관리하는 Swift 라이브러리입니다. 이 클래스는 URL 방문 횟수를 추적하고, 검색 및 히스토리 데이터 관리 기능을 제공합니다.
+
+### 현재는 SPM만을 지원하고 있습니다.
 ## 기능 사용 방법
 
 ### URL 추가
