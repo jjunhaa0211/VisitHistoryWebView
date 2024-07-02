@@ -9,7 +9,7 @@
 
 ### URL 추가
 
-URL 방문 이력을 추가하려면 `addHistory` 메서드를 사용합니다. 이 메서드는 URL 객체와 선택적으로 출력 여부를 인자로 받습니다.
+URL 방문 기록을 추가하려면 `addHistory` 메서드를 사용합니다. 이 메서드는 URL 객체와 선택적으로 출력 여부를 인자로 받습니다.
 
 ```swift
 try historyManager.addHistory(URL(string: "https://example.com")!, shouldPrint: true)
