@@ -26,10 +26,13 @@ open class HistoryManager {
     // 저장소 타입 설정 함수
     open func configureStorageType(_ type: StorageType) {
         storageType = type
-        if type == .userDefaults {
+        switch storageType {
+        case .userDefaults:
             loadHistoryFromUserDefaults()
-        } else if type == .keychain {
+        case .keychain:
             loadHistoryFromKeychain()
+        case .inMemory:
+            break
         }
     }
     
