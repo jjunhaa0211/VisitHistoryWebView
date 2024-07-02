@@ -51,7 +51,6 @@ open class HistoryManager {
         case .inMemory:
             return Array(historyList.keys)
         case .userDefaults:
-            // UserDefaults의 히스토리 키를 absoluteString을 사용하여 정렬
             let history = getHistoryFromUserDefaults()
             return history.keys.sorted { $0.absoluteString < $1.absoluteString }
         case .keychain:
@@ -253,13 +252,10 @@ private extension HistoryManager {
     
     // Keychain에서 URL 히스토리를 불러오는 내부 함수
     func getHistoryFromKeychain() -> [URL: Int] {
-        // KeychainManager에서 모든 키를 가져옵니다.
         let keys = KeychainManager.shared.getAllKeys()
         var history = [URL: Int]()
         for key in keys {
-            // 각 키에 대해 저장된 값을 조회합니다.
             if let value = KeychainManager.shared.retrieve(key: key), let count = Int(value) {
-                // 값이 정상적으로 조회되면, URL 객체를 생성하고 히스토리 딕셔너리에 추가합니다.
                 if let url = URL(string: key) {
                     history[url] = count
                 }
