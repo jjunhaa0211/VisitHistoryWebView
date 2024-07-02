@@ -95,3 +95,9 @@ Keychain에서 데이터를 삭제하려면 `delete` 메서드를 사용합니
 let deleteSuccess = KeychainManager.shared.delete(key: "exampleKey")
 print("Delete successful: \(deleteSuccess)")
 ```
+
+## 자세한 예제가 필요하다면 아래를 참고해주세요
+[예제 코드 바로가기](https://github.com/jjunhaa0211/VisitHistoryWebView/tree/main/Example/Example)
+
+![Simulator Screen Recording - iPhone 15 Pro Max M - 2024-07-02 at 10 35 43](https://github.com/jjunhaa0211/VisitHistoryWebView/assets/102890390/8096869d-cf94-4cc9-8c07-2e500a6cfd5c)
+
