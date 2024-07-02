@@ -1,8 +1,17 @@
 import UIKit
+import Then
+import SnapKit
 
-class HistoryViewController: UITableViewController {
-    private var historyList: [URL] {
-        return HistoryManager.shared.getHistory()
+class HistoryViewController: UITableViewController, UISearchBarDelegate {
+    private var historyList: [URL] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+
+    private let searchController = UISearchController(searchResultsController: nil).then {
+        $0.obscuresBackgroundDuringPresentation = false
+        $0.searchBar.placeholder = "Search URLs"
     }
 
     override func viewDidLoad() {
@@ -10,15 +19,20 @@ class HistoryViewController: UITableViewController {
         HistoryManager.shared.configureStorageType(.keychain)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         setupNavigationBar()
+        historyList = HistoryManager.shared.getHistory()
     }
     
     func setupNavigationBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear All", style: .plain, target: self, action: #selector(clearAllHistory))
+
+        searchController.searchBar.delegate = self
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
 
     @objc func clearAllHistory() {
         HistoryManager.shared.clearHistory()
-        tableView.reloadData()
+        historyList = HistoryManager.shared.getHistory()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,10 +57,23 @@ class HistoryViewController: UITableViewController {
         if editingStyle == .delete {
             do {
                 try HistoryManager.shared.deleteHistory(at: indexPath.row)
+                historyList.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             } catch {
                 print("Failed to delete history at index \(indexPath.row): \(error)")
             }
         }
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            historyList = HistoryManager.shared.getHistory()
+        } else {
+            historyList = HistoryManager.shared.searchHistory(keyword: searchText)
+        }
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        historyList = HistoryManager.shared.getHistory()
     }
 }
